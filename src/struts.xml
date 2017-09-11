@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!-- 需要继承 struts-default包 -->
+	<package name="Login" extends="struts-default">
+			<action name="isvalid" class="com.action.LoginAction" method="login">
+			<result name="success">loginview_success.jsp</result>
+			<result name="error" >loginview_error.jsp</result>
+		</action>	
+	</package>
+	<!--注册账号  -->
+	<package name="Register" extends="struts-default">
+	<action name="Register" class="com.action.RegisterAction" method="isExisted">
+	<result name="existed">/login/loginview_error.jsp</result>
+	<result name="none">/login/loginview_success.jsp</result>
+	</action>
+	</package>
+</struts>
