@@ -36,6 +36,7 @@
 			<list>
 				<!-- 以下用来列出所有的PO类-->
 				<value>com.model.Account</value>
+				<value>com.model.UserInfor</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate SessionFactory的属性 -->

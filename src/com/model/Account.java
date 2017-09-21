@@ -10,14 +10,11 @@ public class Account implements Serializable{
 	 * 
 	 */
 	private static final long serialVersionUID = 2046045738166618185L;
-	@Id
+	@Id@Column(name="account_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	//账号ֵ
-	private String userphone;
-	//密码ֵ
+	private  Integer account;
 	private String password;
-	//权限ֵ
 	private Integer jurisdiction;
 	public Integer getId() {
 		return id;
@@ -31,12 +28,11 @@ public class Account implements Serializable{
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
-	public String getUserphone() {
-		return userphone;
+	public Integer getAccount() {
+		return account;
 	}
-	public void setUserphone(String userphone) {
-		this.userphone = userphone;
+	public void setAccount(Integer account) {
+		this.account = account;
 	}
 	public static long getSerialversionuid() {
 		return serialVersionUID;

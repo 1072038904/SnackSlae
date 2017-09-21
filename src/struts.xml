@@ -6,16 +6,13 @@
 <struts>
 	<!-- 需要继承 struts-default包 -->
 	<package name="Login" extends="struts-default">
-			<action name="isvalid" class="com.action.LoginAction" method="login">
+			<action name="isvalid" class="com.action.AccountManage.LoginAction" method="Login">
 			<result name="success">loginview_success.jsp</result>
 			<result name="error" >loginview_error.jsp</result>
 		</action>	
-	</package>
-	<!--注册账号  -->
-	<package name="Register" extends="struts-default">
-	<action name="Register" class="com.action.RegisterAction" method="isExisted">
-	<result name="existed">/login/loginview_error.jsp</result>
-	<result name="none">/login/loginview_success.jsp</result>
+	<action name="isregister" class="com.action.AccountManage.RegisterAction" method="Register">
+	<result name="success">registerview_success.jsp</result>
+	<result name="error">registerview_error.jsp</result>
 	</action>
 	</package>
 </struts>
