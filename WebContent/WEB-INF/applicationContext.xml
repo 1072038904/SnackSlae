@@ -15,11 +15,12 @@
 	http://www.springframework.org/schema/aop/spring-aop.xsd">
 		<context:component-scan base-package="com"/>
 		<context:annotation-config /> 
+		<context:property-placeholder/>
 		<tx:annotation-driven transaction-manager="transactionManager"/>
 		
 	<!-- 定义数据源Bean，使用C3P0数据源实现，并注入数据源的必要信息 -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-		destroy-method="close"
+		destroy-method="close" 
 		p:driverClass="com.mysql.jdbc.Driver"
 		p:jdbcUrl="jdbc:mysql://localhost/test"
 		p:user="root"
@@ -37,6 +38,11 @@
 				<!-- 以下用来列出所有的PO类-->
 				<value>com.model.Account</value>
 				<value>com.model.UserInfor</value>
+				<value>com.model.Snacks</value>
+				<value>com.model.Commodity</value>
+				<value>com.model.Order</value>
+				<value>com.model.Request</value>
+				<value>com.model.ShoppingCart</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate SessionFactory的属性 -->
