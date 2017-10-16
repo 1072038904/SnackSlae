@@ -1,8 +1,8 @@
 package com.dao;
 
 import com.dao.common.BaseDao;
-import com.model.Order;
+import com.model.OrderForm;
 
-public interface OrderDao extends BaseDao<Order>{
+public interface OrderDao extends BaseDao<OrderForm>{
 
 }

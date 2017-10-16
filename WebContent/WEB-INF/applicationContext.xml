@@ -40,7 +40,7 @@
 				<value>com.model.UserInfor</value>
 				<value>com.model.Snacks</value>
 				<value>com.model.Commodity</value>
-				<value>com.model.Order</value>
+				<value>com.model.OrderForm</value>
 				<value>com.model.Request</value>
 				<value>com.model.ShoppingCart</value>
 			</list>

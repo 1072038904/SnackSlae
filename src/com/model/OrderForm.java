@@ -1,40 +1,41 @@
 package com.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
-import com.mysql.fabric.xmlrpc.base.Data;
-
-public class Order {
-	@Id
-	private Integer orderNumber;
-	private Data creation;
+@Entity
+public class OrderForm {
+	@Id@Column(name="order_number")
+	private Integer number;
+	private String creationDate;
 	private String ContactName;
 	private String ContactTele;
-	//订单状态
 	private String TransactionStaus;
-	@OneToOne
-	@JoinColumn(name="request_id")
+	@OneToOne(targetEntity=Request.class)
+	@JoinColumn(name="request_id",referencedColumnName="request_id")
 	private Request request;
-	@OneToOne
-	@JoinColumn(name="account",referencedColumnName="account",unique=true)
+	@OneToOne(targetEntity=Account.class)
+	@JoinColumn(name="account",referencedColumnName="account")
 	private Account account;
-	public Order() {
+	public OrderForm() {
 		// TODO 自动生成的构造函数存根
 	}
-	public Integer getOrderNumber() {
-		return orderNumber;
+
+	public Integer getNumber() {
+		return number;
 	}
-	public void setOrderNumber(Integer orderNumber) {
-		this.orderNumber = orderNumber;
+
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
-	public Data getCreation() {
-		return creation;
+
+	public String getCreationDate() {
+		return creationDate;
 	}
-	public void setCreation(Data creation) {
-		this.creation = creation;
+	public void setCreationDate(String creationDate) {
+		this.creationDate = creationDate;
 	}
 	public String getContactName() {
 		return ContactName;
@@ -54,11 +55,12 @@ public class Order {
 	public void setTransactionStaus(String transactionStaus) {
 		TransactionStaus = transactionStaus;
 	}
-	public Request getRequest() {
-		return request;
-	}
-	public void setRequest(Request request) {
-		this.request = request;
-	}
 
+	public Account getAccount() {
+		return account;
+	}
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+	
 }

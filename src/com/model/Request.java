@@ -10,16 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
-
+@Entity
 public class Request {
-	@Id@Column(name="requst_id")
+	@Id@Column(name="request_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String specification;
 	private int number;
 	private String address;
 	@OneToMany(targetEntity=Commodity.class)
-	@JoinColumn(name="commodity_id",referencedColumnName="commodity_id")
+	@JoinColumn(name="request_id",referencedColumnName="request_id")
 	private Set<Commodity> commodities=new HashSet<>();
 	public Request() {
 		// TODO 自动生成的构造函数存根
