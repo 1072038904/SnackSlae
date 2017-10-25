@@ -4,12 +4,13 @@ import org.springframework.stereotype.Controller;
 
 import com.model.Account;
 import com.service.AccountManage.LoginService;
+import com.sun.org.apache.bcel.internal.generic.NEW;
 @Controller
 public class LoginAction{
 
 	@Autowired
 	private LoginService loginService;
-	private Account account;
+	private Account account =new Account();
 	public LoginAction(LoginService loginService, Account account) {
 		super();
 		this.loginService = loginService;
@@ -34,7 +35,7 @@ public class LoginAction{
 		return "error";
 	}
 	public String Login()throws Exception{
-		System.out.println(loginService.isValid(account));
+		account.setJurisdiction(1);
 		if(loginService==null)
 		{
 			return "eorror";

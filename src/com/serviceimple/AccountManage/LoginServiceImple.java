@@ -39,8 +39,18 @@ public class LoginServiceImple implements LoginService{
 
 	@Override
 	public void saveAccount(Account account) {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		loginDao.save(account);
+	}
+
+	@Override
+	public int isExisted(Account account) {
+		// TODO Auto-generated method stub
+		List<Account> pl =loginDao.find("from Account where account='"+account.getAccount()+"'");	
+		if(pl.isEmpty()!=true){
+			return 1;
+		}
+		return 2;
 	}
 	
 }

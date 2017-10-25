@@ -46,13 +46,18 @@ public class BaseDaoHibernate4<T> implements BaseDao<T>
 		return (T)getSessionFactory().getCurrentSession()
 			.get(entityClazz , id);
 	}
-	// ����ʵ��
+	//每次进行保存时候刷新缓存
 	public Serializable save(T entity)
 	{
-		return getSessionFactory().getCurrentSession()
-			.save(entity);
+		
+		return  getSessionFactory().getCurrentSession()
+				.save(entity);
 	}
-	// ����ʵ��
+	public void saveAll(List <T>list){
+		for(int i=0;i<list.size();i++) {
+		getSessionFactory().getCurrentSession().save(list.get(i));
+		}
+	}
 	public void update(T entity)
 	{
 		getSessionFactory().getCurrentSession().saveOrUpdate(entity);
@@ -157,5 +162,12 @@ public class BaseDaoHibernate4<T> implements BaseDao<T>
 		return query.setFirstResult((pageNo - 1) * pageSize)
 			.setMaxResults(pageSize)
 			.list();
+	}
+	@Override
+	public Object merge(T entity) {
+		// TODO Auto-generated method stub
+		
+		return getSessionFactory().getCurrentSession()
+				.merge(entity);
 	}
 }

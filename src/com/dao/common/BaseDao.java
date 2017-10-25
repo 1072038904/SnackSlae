@@ -30,4 +30,7 @@ public interface BaseDao<T>
 	// ��ȡʵ������
 	long findCount(Class<T> entityClazz);
 	List<T> find(String hql);
+	Object merge(T entity);
+	void saveAll(List <T>list);
+	
 }

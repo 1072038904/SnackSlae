@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+encoding//WebContent/addsnacks.jsp=UTF-8
 encoding//src/com/daoimple/AccountManage/LoginDaoImple.java=UTF-8
-encoding//src/com/daoimple/SnacksDaoImple.java=UTF-8
+encoding//src/com/daoimple/SnacksManage/SnacksDaoImple.java=UTF-8

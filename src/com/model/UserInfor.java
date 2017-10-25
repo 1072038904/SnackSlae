@@ -12,6 +12,7 @@ public class UserInfor {
 	@Id@Column(name="userInfor_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	private String name;
 	private String telephone;
 	private String address;
 	@OneToOne(targetEntity=Account.class) 
@@ -27,6 +28,14 @@ public class UserInfor {
 
 	public String getTelephone() {
 		return telephone;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public void setTelephone(String telephone) {

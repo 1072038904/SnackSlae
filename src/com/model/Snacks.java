@@ -3,8 +3,6 @@ package com.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 
 @Entity
 public class Snacks {
@@ -13,6 +11,7 @@ public class Snacks {
 	private String priClassification;
 	private String secClassification;
 	private String packMethod;
+	private double price;
 	public String getName() {
 		return name;
 	}
@@ -36,6 +35,12 @@ public class Snacks {
 	}
 	public String getPackMethod() {
 		return packMethod;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	public Snacks() {
 		// TODO 自动生成的构造函数存根
