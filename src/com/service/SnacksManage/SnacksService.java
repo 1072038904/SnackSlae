@@ -3,8 +3,9 @@ package com.service.SnacksManage;
 import java.util.List;
 
 import com.model.Snacks;
+import com.service.common.BaseService;
 
-public interface SnacksService {
+public interface SnacksService extends BaseService<Snacks>{
 void saveNewSnacks(Snacks snacks);
 /**
  * 判断零食信息是否存在
@@ -16,4 +17,5 @@ void saveAllSnacks(List <Snacks>list);
 void mergeNewSnacks(Snacks snacks);
 List <Snacks>  findAllSnacks();
 Snacks findSnacks(Snacks snacks);
+
 }

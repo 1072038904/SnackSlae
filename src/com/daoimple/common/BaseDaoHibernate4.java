@@ -127,13 +127,11 @@ public class BaseDaoHibernate4<T> implements BaseDao<T>
 	 * @return ��ǰҳ�����м�¼
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByPage(String hql,
+	public List<T> findByPage(String hql,
 		 int pageNo, int pageSize)
 	{
-		// ������ѯ
 		return getSessionFactory().getCurrentSession()
 			.createQuery(hql)
-			// ִ�з�ҳ
 			.setFirstResult((pageNo - 1) * pageSize)
 			.setMaxResults(pageSize)
 			.list();
@@ -147,18 +145,15 @@ public class BaseDaoHibernate4<T> implements BaseDao<T>
 	 * @return ��ǰҳ�����м�¼
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByPage(String hql , int pageNo, int pageSize
+	public List<T> findByPage(String hql , int pageNo, int pageSize
 		, Object... params)
 	{
-		// ������ѯ
 		Query query = getSessionFactory().getCurrentSession()
 			.createQuery(hql);
-		// Ϊ����ռλ����HQL������ò���
 		for(int i = 0 , len = params.length ; i < len ; i++)
 		{
 			query.setParameter(i + "" , params[i]);
 		}
-		// ִ�з�ҳ�������ز�ѯ���
 		return query.setFirstResult((pageNo - 1) * pageSize)
 			.setMaxResults(pageSize)
 			.list();

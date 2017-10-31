@@ -9,10 +9,12 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import com.model.Commodity;
 import com.model.Snacks;
 import com.service.SnacksManage.SnacksService;
 import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.util.FormatTestDataToArray;
+import com.util.PageBean;
 
 import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
@@ -23,11 +25,19 @@ private SnacksService snacksService;
 private String packMethod;
 private Snacks snacks=new Snacks();
 private List <Snacks>snacks2 =new ArrayList<>();
-	public SnacksAction() {
+private PageBean pageBean =new PageBean();
+private Integer currentPage=new Integer(1);
+public SnacksAction() {
 		// TODO Auto-generated constructor stub
 	}
 	public SnacksService getSnacksService() {
 		return snacksService;
+	}
+	public Integer getCurrentPage() {
+		return currentPage;
+	}
+	public void setCurrentPage(Integer currentPage) {
+		this.currentPage = currentPage;
 	}
 	public void setSnacksService(SnacksService snacksService) {
 		this.snacksService = snacksService;
@@ -52,6 +62,12 @@ private List <Snacks>snacks2 =new ArrayList<>();
 	}
 	public void setSnacks2(List<Snacks> snacks2) {
 		this.snacks2 = snacks2;
+	}
+	public PageBean getPageBean() {
+		return pageBean;
+	}
+	public void setPageBean(PageBean pageBean) {
+		this.pageBean = pageBean;
 	}
 	public String saveDemoData(){
 		String string[]=new String[]{"夏威夷果-袋装,坚果炒货,夏威夷果,袋装,25"
@@ -135,4 +151,16 @@ private List <Snacks>snacks2 =new ArrayList<>();
 		return "success";
 		return "error";
 	}
+	public String findSnacksPage(){
+			pageBean=snacksService.findEntityByPage(snacks.getName(), Snacks.class, currentPage, 10);
+			return "success";
+		
+	}
+	//带分页的查询商品的执行方法  
+	public String findAll(){  	
+			//pageBean=commodityService.findCommodityByPage(currentPage,10);
+		pageBean=snacksService.findEntityByPage(Snacks.class, currentPage, 10);
+	    return "success";     
+	} 
+	
 }

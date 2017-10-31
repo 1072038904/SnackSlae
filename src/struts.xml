@@ -23,22 +23,79 @@
 	</action>
 	<!-- 零食单条数据保存 -->
 	<action name="saveSnacks" class="com.action.SnacksManage.SnacksAction" method="saveNewSnacks">
-	<result name="success">AccountManage/register/registerview_existed.jsp</result>
+	<result name="success">addCommodity_success.jsp</result>
 	<result name="error">AccountManage/register/registerview_error.jsp</result>
 	</action>
-	<!-- 零食全部数据查询 -->
-	<action name="findAllSnacks" class="com.action.SnacksManage.SnacksAction" method="findAllSnacks">
-	<result name="success" >AdminManage/addCommodity.jsp</result>
+	<!-- 零食添加 -->
+	<action name="addCommodity" class="com.action.SnacksManage.SnacksAction" method="findAllSnacks">
+	<result name="success" >addCommodity.jsp</result>
 	</action>
+	<!-- 商品添加 -->
+	<action name="addCommodity" class="com.action.SnacksManage.SnacksAction" method="findAllSnacks">
+	<result name="success" >addCommodity.jsp</result>
+	</action>
+	
 	<!-- 商品单条数据保存 -->
 	<action name="saveCommodity" class="com.action.CommodityManage.CommodityAction" method="saveNewCommodity">
-	<result name="success" >AdminManage/addCommodity_success.jsp</result>
+	<result name="success" >addCommodity_success.jsp</result>
 	<result name="existed" >AdminManage/addCommodity_existed.jsp</result>
 	</action>
 	<!-- 查询商品 -->
 	<action name="searchCommodity" class="com.action.CommodityManage.CommodityAction" method="findCommodity">
-	<result name="success" >AdminManage/searchCommodity_success.jsp</result>
+	<result name="success">searchCommodity.jsp</result>
 	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
 	</action>
+	<!-- 按页查询商品 -->
+	<action name="searchCommodityPage" class="com.action.CommodityManage.CommodityAction" method="findCommodityPage">
+	<result name="success">allCommodity.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 查询所有商品 -->
+	<action name="findAllCommodity" class="com.action.CommodityManage.CommodityAction" method="findAll">
+	<result name="success">allCommodity.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 删除某个商品 -->
+	<action name="deleteCommodity" class="com.action.CommodityManage.CommodityAction" method="deleteCommodity">
+	<result name="success" type="chain">findAllCommodity</result>
+	<result name="none" >addCommodity_existed.jsp</result>
+	</action>
+	<!-- 修改某个商品 -->
+	<action name="updateCommodity" class="com.action.CommodityManage.CommodityAction" method="updateCommodity">
+	<result name="success" type="chain">findAllCommodity</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 商品单条数据保存 -->
+	<action name="saveCommodity" class="com.action.CommodityManage.CommodityAction" method="saveNewCommodity">
+	<result name="success" >addCommodity_success.jsp</result>
+	<result name="existed" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	
+	<!-- 查询零食 -->
+	<action name="searchSnacks" class="com.action.SnacksManage.SnacksAction" method="findSnacks">
+	<result name="success">searchSnacks.jsp</result>
+	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
+	</action>
+	<!-- 按页查询商品 -->
+	<action name="searchSnacksPage" class="com.action.SnacksManage.SnacksAction" method="findSnacksPage">
+	<result name="success">allSnacks.jsp</result>
+	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
+	</action>
+	<!-- 查询所有商品 -->
+	<action name="findAllSnacks" class="com.action.SnacksManage.SnacksAction" method="findAll">
+	<result name="success">allSnacks.jsp</result>
+	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
+	</action>
+	<!-- 删除某个商品 -->
+	<action name="deleteSnacks" class="com.action.SnacksManage.SnacksAction" method="deleteSnacks">
+	<result name="success" type="chain">findAllSnacks</result>
+	<result name="none" >addSnacks_existed.jsp</result>
+	</action>
+	<!-- 修改某个商品 -->
+	<action name="updateSnacks" class="com.action.SnacksManage.SnacksAction" method="updateSnacks">
+	<result name="success" type="chain">findAllSnacks</result>
+	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
+	</action>
+	
 	</package>
 </struts>

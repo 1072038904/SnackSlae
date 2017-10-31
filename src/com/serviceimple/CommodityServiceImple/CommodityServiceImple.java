@@ -2,19 +2,20 @@ package com.serviceimple.CommodityServiceImple;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.CommodityManage.CommodityDao;
 import com.model.Commodity;
-import com.model.Snacks;
+import com.serviceimple.common.BaseServiceImple;
 import com.util.GeneratedHql;
+import com.util.PageBean;
 @Service
 @Transactional
-public class CommodityServiceImple implements com.service.CommodityService.CommodityService {
-	@Autowired
+public class CommodityServiceImple extends BaseServiceImple <Commodity>implements com.service.CommodityService.CommodityService {
+	
 	private CommodityDao commodityDao;
 	public CommodityServiceImple() {
 		// TODO Auto-generated constructor stub
@@ -30,8 +31,9 @@ public class CommodityServiceImple implements com.service.CommodityService.Commo
 	public CommodityDao getCommodityDao() {
 		return commodityDao;
 	}
-
+	@Resource
 	public void setCommodityDao(CommodityDao commodityDao) {
+		super.setBaseDao(commodityDao);
 		this.commodityDao = commodityDao;
 	}
 
@@ -39,7 +41,7 @@ public class CommodityServiceImple implements com.service.CommodityService.Commo
 	public int isCommodityExisted(Commodity commodity) {
 		// TODO Auto-generated method stub
 		List<Commodity> ple=commodityDao.find(GeneratedHql.genHql("Commodity", "name",commodity.getName()));
-		if(ple.isEmpty()==true){
+		if(ple.isEmpty()!=true){
 			return 1;
 		}
 		return 2;
@@ -55,6 +57,14 @@ public class CommodityServiceImple implements com.service.CommodityService.Commo
 		}
 		return null;
 	}
-	
+
+	@Override
+	public List<Commodity> findAllCommodity() {
+		// TODO Auto-generated method stub	
+		return commodityDao.findAll(Commodity.class);
+	}
+
+
+
 
 }

@@ -20,7 +20,7 @@ public class OrderForm {
 	@JoinColumn(name="account",referencedColumnName="account")
 	private Account account;
 	public OrderForm() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êý´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
 	public Integer getNumber() {

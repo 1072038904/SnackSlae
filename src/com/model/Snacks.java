@@ -2,11 +2,15 @@ package com.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Snacks {
-	@Id@Column(name="snacks_name")
+	@Id@Column(name="snacks_id")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
 	private String name;
 	private String priClassification;
 	private String secClassification;
@@ -15,6 +19,15 @@ public class Snacks {
 	public String getName() {
 		return name;
 	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getPriClassification() {
 		return priClassification;
 	}
@@ -43,7 +56,7 @@ public class Snacks {
 		this.price = price;
 	}
 	public Snacks() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êý´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
 }

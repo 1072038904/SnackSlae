@@ -1,7 +1,8 @@
 package com.serviceimple.SnacksManage;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,20 +11,23 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dao.SnacksManage.SnacksDao;
 import com.model.Snacks;
 import com.service.SnacksManage.SnacksService;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
+import com.serviceimple.common.BaseServiceImple;
 import com.util.GeneratedHql;
 @Service
 @Transactional
-public class SnacksServiceImple implements SnacksService{
-	@Autowired
+public class SnacksServiceImple extends BaseServiceImple<Snacks>implements SnacksService{
+	
 	private SnacksDao snacksDao;
 	public SnacksServiceImple() {
 	}
 	public SnacksDao getSnacksDao() {
 		return snacksDao;
 	}
+	@Resource
 	public void setSnacksDao(SnacksDao snacksDao) {
+		super.setBaseDao(snacksDao);
 		this.snacksDao = snacksDao;
+		
 	}
 @Override
 public void saveNewSnacks(Snacks snacks) {
