@@ -1,0 +1,91 @@
+<%@ page contentType="text/html; charset=UTF-8" language="java" errorPage="" %>
+    <%@taglib prefix="s" uri="/struts-tags"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html >
+<html>
+<head>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
+<title>用户个人信息</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="<%=basePath%>files/adminindex/styles.css" type="text/css" rel="stylesheet"/>
+<link href="<%=basePath%>files/form/styles.css" type="text/css" rel="stylesheet"/>
+<link href="<%=basePath%>files/h/styles.css" type="text/css" rel="stylesheet"/>
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+<link href="<%=basePath%>css/style.css" rel='stylesheet' type='text/css' />
+
+</head>		    
+<!-- 导航栏 -->
+<div class="header">
+		<div class="container">
+			<div class="row">
+			  <div class="col-md-12">
+					 <div class="menu">
+		<ul class="nav navbar-nav">
+        <li><a href="findAllUserCommodity.action" >商品首页</a></li>
+        <li><a href="searchSnacks.jsp" >零食管理</a></li>
+        <li><a href="conFirmOrder.jsp" >我的订单</a></li>
+        <li><a href="#" >公告</a></li>
+        <li><a href="searchShopingCartByPageAccount.action" >售后服务</a></li> 
+</ul> 
+</div>  
+ <form class="navbar-form navbar-left"  action="searchCommodity" method="post"  role="search">
+<div class="form-group">
+<label class="sr-only"></label>
+<s:textfield name="commodity.name" class="form-control" value="请输入查询商品的名字" />
+</div>
+<button type="submit" class="btn btn-default navbar-btn">搜索</button>
+<a href="findUserInfor.action" >
+<button type="button" class="btn btn-default btn-sm">
+	<c:if test="${account!=null}">
+    <span class="glyphicon glyphicon-user">&nbsp;${account.account}</span>	
+    </c:if>
+    <c:if test="${account==null}">
+    <span class="glyphicon glyphicon-user">未登录,请登录</span>	
+    </c:if>
+</button></a>      
+</form>
+
+</div>
+
+</div>  
+</div>
+</div>
+<div class="normal">
+<ul class="nav nav-tabs">
+</ul>
+</div>
+ <div class="main">
+ <div class="shop_top">
+ 	<div class="container">
+ <s:iterator value="%{commodity}" var="sa">
+ <div class="row">
+			<div class="row shop_box-top">
+		<div class="col-md-3 shop_box"><a href="<%=basePath%>${commodity.picturePath}">
+					<img src="<%=basePath%>${picturePath}" class="img-responsive" alt=""/></a>
+					<span class="new-box">
+						<span class="new-label">New</span>
+					</span>
+					<div class="shop_desc">
+						<h3> <s:property value="#sa.name"/></h3>
+						<p>上架时间:<s:property value="#sa.shelfTime"/></p>
+						<p>销售量:<s:property value="#sa.salesVolume" />
+						库存:<s:property value="#sa.stock" /></p>						
+						<span class="actual">￥<s:property value="#sa.price" /></span><br>
+						<ul class="buttons">
+							<li class="cart"><a href="#">添加进购物车</a></li>
+							<li class="shop_btn"><a href="#">Read More</a></li>					
+					    </ul>
+				    </div>
+				    </div>
+				</div>
+				</div>
+				
+				
+	</s:iterator></div>	</div>	</div>
+</body>
+</html>
