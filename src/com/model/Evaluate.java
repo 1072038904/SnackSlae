@@ -1,20 +1,24 @@
 package com.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-
+@Entity
 public class Evaluate {
 @Id@Column
 @GeneratedValue(strategy=GenerationType.IDENTITY)
 private Integer id;
 private String Content;
-@OneToOne
+@OneToOne(targetEntity=Account.class)
+@JoinColumn(name="account_id",referencedColumnName="id")
 private Account account;
 @ManyToOne
+@JoinColumn(name="commodity_id",referencedColumnName="commodity_id")
 private Commodity commodity;
 private int score;
 

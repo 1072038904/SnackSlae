@@ -2,25 +2,18 @@ package com.action.AccountManage;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.action.common.BaseAction;
 import com.model.UserInfor;
-import com.service.AccountManage.LoginService;
 import com.service.AccountManage.RegisterService;
 
 @Controller
-public class RegisterAction {
+public class RegisterAction extends BaseAction{
 	@Resource
 private RegisterService registerService;
-	@Resource
-	private LoginService loginService;
 	private UserInfor userInfor= new UserInfor();
-	public LoginService getLoginService() {
-		return loginService;
-	}
-	public void setLoginService(LoginService loginService) {
-		this.loginService = loginService;
-	}
+
 	public RegisterService getRegisterService() {
 		return registerService;
 	}
@@ -34,20 +27,18 @@ private RegisterService registerService;
 		this.userInfor = userInfor;
 	}
 	public RegisterAction() {
-		// TODO �Զ����ɵĹ��캯�����
 	}
 	public String execute() throws Exception{
 		return "error";
 	}
 	public String Register()throws Exception{
-		//int judge=registerService.isRegister(userInfor);
 		if(loginService.isExisted(userInfor.getAccount())==1){
 			return "existed";
 		}
-		
 		else{
+			userInfor.getAccount().setJurisdiction(2);
 			loginService.saveAccount(userInfor.getAccount());
-			registerService.saveUserInfor(userInfor);
+			userInforService.saveNewEntity(userInfor);
 			return "success";
 		}
 	}

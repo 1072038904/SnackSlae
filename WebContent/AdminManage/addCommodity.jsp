@@ -50,7 +50,7 @@
 </ul>
 </div>
 
-<form class="bootstrap-frm" role="form" action="saveCommodity" method="post" enctype="multipart/form-data">
+<form class="bootstrap-frm" role="form" action="saveCommodity" method="post"  enctype="multipart/form-data">
 <s:textfield name="commodity.name" value="大袋牛肉干" />
 <s:textfield name="commodity.shelfTime"  value="2017-10-24"/>
 <s:textfield value="10.00" name="commodity.price"/>
@@ -58,7 +58,7 @@
 <s:label>选择商品的样品图片</s:label>
 <s:file name="upload"  accept="image/gif,image/jpeg,image/jpg,image/png,image/svg" />
 <s:select name="snacksName" list="snacks2" listKey="name" listValue="name"/>
-      <button type="submit" class="btn btn-default">提交</button>
+      <s:submit class="btn-default">提交</s:submit>
 </form>
 
 </body>

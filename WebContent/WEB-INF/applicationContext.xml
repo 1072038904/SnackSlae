@@ -43,6 +43,7 @@
 				<value>com.model.OrderForm</value>
 				<value>com.model.Request</value>
 				<value>com.model.ShoppingCart</value>
+				<value>com.model.Evaluate</value>
 			</list>
 		</property>
 		<!-- 定义Hibernate SessionFactory的属性 -->

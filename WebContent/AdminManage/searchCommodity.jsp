@@ -28,7 +28,7 @@
 		<ul class="nav navbar-nav">
         <li><a href="searchCommodity.jsp" >商品管理</a></li>
         <li><a href="searchSnacks.jsp" >零食管理</a></li>
-        <li><a href="#" >订单管理</a></li>
+        <li><a href="<%=basePath%>AdminManage/findOrderPage.action" >订单管理</a></li>
         <li><a href="#" >公告管理</a></li>
         <li><a href="#" >售后服务管理</a></li> 
 </ul> 
@@ -50,7 +50,7 @@
 <li><a href="findAllCommodity.action">所有商品</a></li>
 </ul>
 </div>
- <s:iterator value="%{commodity}" id="sa">
+ <s:iterator value="%{commodity}" var="sa">
  <div class="main">
       <div class="shop_top">
 		<div class="container">

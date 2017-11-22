@@ -50,7 +50,7 @@
 <li><a href="findAllSnacks.action">所有零食</a></li>
 </ul>
 </div>
- <s:iterator value="%{commodity}" id="sa">
+ <s:iterator value="%{commodity}" var="sa">
  <div class="main">
       <div class="shop_top">
 		<div class="container">

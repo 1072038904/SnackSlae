@@ -72,7 +72,11 @@
 <div class="container">
 <form class="navbar-form navbar-left"  action="searchCommodityPage" method="post"  role="search">
 <s:textfield name="commodity.name" class="form-control" value="请输入查询商品的名字" />
-<button type="submit" class="btn btn-default navbar-btn">搜索</button>                  
+<button type="submit" class="btn btn-default navbar-btn">搜索</button>
+<s:iterator value="pageBean.list" >
+<span></span>
+<span></span>
+</s:iterator>
 </form>
 <div  style="width:600px;"class="table table-bordered ">
 <table class="table" >
@@ -84,12 +88,12 @@
         <th>上架时间</th>
         <th>库存</th>
         <th>销量</th>
-        <th>属于零食种类</th>
+        <th>零食种类</th>
         <th>操作</th>
         </tr>
     </thead>
      <tbody>
-<s:iterator value="pageBean.list" id="sa">
+<s:iterator value="pageBean.list" >
 <tr>
 <form action="updateCommodity" method="post">
 <input style="width:150px" type="hidden" id="cname" name="commodity.id"  value="<s:property value="id"/>"/>
@@ -107,8 +111,8 @@
 </s:iterator>
 <tr>
     <td style="width:100px">
-                <s:if test="pageBean.firstPage">
-                    <s:url id="getUsers_first" value="findAllCommodity.action">
+                <s:if test="pageBean.firstPage==true">
+                    <s:url var="getUsers_first" value="findAllCommodity.action">
                         <s:param name="currentPage" value="1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_first}">首页</s:a>
@@ -118,8 +122,8 @@
                 </s:else>
                 </td>
             <td style="width:100px">
-                <s:if test="pageBean.hasPreviousPage">
-                    <s:url id="getUsers_previous" value="findAllCommodity.action">
+                <s:if test="pageBean.hasPreviousPage==true">
+                    <s:url var="getUsers_previous" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.currentPage-1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_previous}">上页</s:a>
@@ -129,8 +133,8 @@
                 </s:else>
             </td>
             <td style="width:150px">
-                <s:if test="pageBean.hasNextPage">
-                    <s:url id="getUsers_next" value="findAllCommodity.action">
+                <s:if test="pageBean.hasNextPage==true">
+                    <s:url var="getUsers_next" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.currentPage+1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_next}">下页</s:a>
@@ -140,8 +144,8 @@
                 </s:else>
             </td>
             <td style="width:50px">
-                <s:if test="pageBean.lastPage">
-                    <s:url id="getUsers_last" value="findAllCommodity.action">
+                <s:if test="pageBean.lastPage==true">
+                    <s:url var="getUsers_last" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.totalPage"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_last}">末页</s:a>

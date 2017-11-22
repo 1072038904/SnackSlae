@@ -1,6 +1,5 @@
 package com.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,14 +8,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 @Entity
 public class UserInfor {
-	@Id@Column(name="userInfor_id")
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
 	private String telephone;
 	private String address;
 	@OneToOne(targetEntity=Account.class) 
-	@JoinColumn(name="account",referencedColumnName="account",unique=true)
+	@JoinColumn(name="account_id",referencedColumnName="id",unique=true)
 	private Account account;
 	public Integer getId() {
 		return id;
@@ -59,7 +58,7 @@ public class UserInfor {
 	}
 
 	public UserInfor() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êý´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
 }

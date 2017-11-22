@@ -4,19 +4,37 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-<constant name="struts.multipart.saveDir" value="/tmp"/>
-	<!-- 登录 -->
-	<package name="s"  extends="struts-default">
+<package name="defaultpackage"   extends="struts-default" >
+
+<interceptors>
+    	<interceptor class="com.filter.AuthorityInterceptor" name="authority" />
+	<interceptor-stack name="mydefault"><!-- 配置内建默认拦截器 -->
+	<interceptor-ref name="authority">
+	<param name="excludeMethods">Login</param>
+	</interceptor-ref>
+	<interceptor-ref name="defaultStack"/><!-- 配置自定义的拦截器 -->
+	</interceptor-stack>
+
+    	</interceptors>
+
+		<!-- 定义全局Result -->
+		<global-results>
+			<!-- 当返回login视图名时，转入loginForm.jsp页面 -->
+			<result name="login">//login.jsp</result>
+		</global-results>
+		
 			<action name="isvalid" class="com.action.AccountManage.LoginAction" method="Login">
-			<result name="success">loginview_success.jsp</result>
+			<result name="success">User/index.jsp</result>
+			<result name="admin">AdminManage/searchCommodity.jsp</result>
 			<result name="error" >loginview_error.jsp</result>
-		</action>	
+		</action>
 		<!-- 注册 -->
 	<action name="isregister" class="com.action.AccountManage.RegisterAction" method="Register">
 	<result name="success">AccountManage/register/registerview_success.jsp</result>
 	<result name="error">AccountManage/register/registerview_error.jsp</result>
 	<result name="existed">AccountManage/register/registerview_existed.jsp</result>
 	</action>
+	
 	<!-- 零食大量数据保存 -->
 	<action name="saveTestData" class="com.action.SnacksManage.SnacksAction" method="saveDemoData">
 	<result name="success"></result>
@@ -45,6 +63,16 @@
 	<result name="success">searchCommodity.jsp</result>
 	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
 	</action>
+	<!-- 按商品二级分类查询商品 -->
+	<action name="searchCommodityBySec" class="com.action.CommodityManage.CommodityAction" method="findAllUserBySec">
+	<result name="success">allUserCommodity.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 按商品包装方式分类查询商品 -->
+	<action name="searchCommodityByPackMethod" class="com.action.CommodityManage.CommodityAction" method="findAllUserByPackMethod">
+	<result name="success">allUserCommodity.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
 	<!-- 按页查询商品 -->
 	<action name="searchCommodityPage" class="com.action.CommodityManage.CommodityAction" method="findCommodityPage">
 	<result name="success">allCommodity.jsp</result>
@@ -70,7 +98,6 @@
 	<result name="success" >addCommodity_success.jsp</result>
 	<result name="existed" >AdminManage/addCommodity_existed.jsp</result>
 	</action>
-	
 	<!-- 查询零食 -->
 	<action name="searchSnacks" class="com.action.SnacksManage.SnacksAction" method="findSnacks">
 	<result name="success">searchSnacks.jsp</result>
@@ -81,7 +108,7 @@
 	<result name="success">allSnacks.jsp</result>
 	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
 	</action>
-	<!-- 查询所有商品 -->
+	<!-- 查询所有零食 -->
 	<action name="findAllSnacks" class="com.action.SnacksManage.SnacksAction" method="findAll">
 	<result name="success">allSnacks.jsp</result>
 	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
@@ -95,6 +122,108 @@
 	<action name="updateSnacks" class="com.action.SnacksManage.SnacksAction" method="updateSnacks">
 	<result name="success" type="chain">findAllSnacks</result>
 	<result name="none" >AdminManage/addSnacks_existed.jsp</result>
+	</action>
+	<!-- 查询所有用户商品 -->
+	<action name="findAllUserCommodity" class="com.action.CommodityManage.CommodityAction" method="findAllUser">
+	<result name="success">allUserCommodity.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!-- 添加商品进购物车 -->
+	<action name="saveUserShoppingCart" class="com.action.ShoppingCartAction" method="saveShoppingCart">
+	<result name="success" type="chain">findAllUserCommodity</result>
+	</action>
+	<!--分页查询购物车信息  -->
+	<action name="searchShopingCartByPageAccount" class="com.action.ShoppingCartAction" method="findShoppingCartPage">
+	<result name="success">shoppingCart.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!--修改购物车数量信息  -->
+	<action name="updateShoppingCartNumber" class="com.action.ShoppingCartAction" method="updateShoppingCart">
+	<result name="success" type="chain">searchShopingCartByPageAccount</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!--删除购物车信息  -->
+	<action name="deleteShoppingCart" class="com.action.ShoppingCartAction" method="deleteShoppingCart">
+	<result name="success" type="chain">searchShopingCartByPageAccount</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 保存用户信息 -->
+	<action name="saveUserInfor" class="com.action.AccountManage.UserInforAction" method="saveUserInfor">
+	<result name="success">userInfor.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	</action>
+	<!-- 查询用户信息 -->
+	<action name="findUserInfor" class="com.action.AccountManage.UserInforAction" method="findUserInfor">
+	<result name="success">userInfor.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+		<!-- 结算购物车信息，保存 -->
+	<action name="saveOrderForm" class="com.action.OrderAction.OrderAction" method="saveOrderForm">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+		<!-- 查看订单信息 -->
+	<action name="findOrderPage" class="com.action.OrderAction.OrderAction" method="findOrderPageByAccount">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+		<!-- 删除订单信息 -->
+	<action name="deleteOrder" class="com.action.OrderAction.OrderAction" method="deleteOrder">
+	<result name="success" type="chain">findOrderPage</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+		<!-- 确认订单信息 -->
+	<action name="confirmOrder" class="com.action.OrderAction.OrderAction" method="confirmOrder">
+	<result name="success" type="chain">findOrderPage</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!-- 查询历史订单信息 -->
+	<action name="findPastOrder" class="com.action.OrderAction.OrderAction" method="findPastOrderPage">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!-- 查询已经付款订单信息 -->
+	<action name="findPayOrder" class="com.action.OrderAction.OrderAction" method="findPayOrderPage">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!-- 查询可评价订单信息 -->
+	<action name="findEvalOrder" class="com.action.OrderAction.OrderAction" method="findEvalOrderPage">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+	<!-- 查询待确认订单信息 -->
+	<action name="findUnFirmOrder" class="com.action.OrderAction.OrderAction" method="findUnFirmOrderPage">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
+	</action>
+		<!-- 退货 -->
+	<action name="returnOrder" class="com.action.OrderAction.OrderAction" method="returnOrder">
+	<result name="success">conFirmOrder.jsp</result>
+	<result name="none" >AdminManage/addCommodity_existed.jsp</result>
+	<interceptor-ref name="defaultStack"/>
+	<interceptor-ref name="authority"/>
 	</action>
 	
 	</package>

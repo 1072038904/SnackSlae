@@ -7,7 +7,7 @@ public class PageBean {
     @SuppressWarnings("rawtypes")
     private List list;
      
-    public PageBean(Integer pageSize) {
+    public PageBean(int pageSize) {
 		super();
 		this.pageSize = pageSize;
 	}
@@ -15,11 +15,11 @@ public class PageBean {
 	//总行数
     private Long allRow;
     //总页数
-    private Integer totalPage;
+    private int totalPage;
     //当前页
-    private Integer currentPage;
+    private int currentPage;
     //每页条目数
-    private Integer pageSize;
+    private int pageSize;
      
     //是否为第一页
     private Boolean firstPage;
@@ -50,19 +50,19 @@ public class PageBean {
     public Number getTotalPage() {
         return totalPage;
     }
-    public Integer getCurrentPage() {
+    public int getCurrentPage() {
         return currentPage;
     }
-    public void setCurrentPage(Integer currentPage) {
+    public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
     }
-    public Integer getPageSize() {
+    public int getPageSize() {
         return pageSize;
     }
-    public void setPageSize(Integer pageSize) {
+    public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-    public void setTotalPage(Integer totalPage) {
+    public void setTotalPage(int totalPage) {
         this.totalPage = totalPage;
     }
     public Boolean getFirstPage() {
@@ -93,25 +93,26 @@ public class PageBean {
     /**
      * 初始化结果页面信息
      */
-    public void init(){
-    	 this.totalPage = countTotalPage(pageSize, allRow);
-    	isFirstPage();
-        isLastPage();
-        isHasPreviousPage();  
-         isHasNextPage();
+    public void init(){ 	   	
+        this.totalPage = countTotalPage(pageSize, allRow);
+    	 isFirstPage();
+    	 isHasPreviousPage();  
+    	 isLastPage();
+    	 isHasNextPage();
+    	// System.out.println(totalPage+" "+pageSize+" "+firstPage+" "+currentPage+" "+lastPage);
     }
      
     private void isFirstPage() {
     	firstPage=(currentPage != 1)?true:false;
     }
     private void isLastPage() {
-    	lastPage=(currentPage != totalPage)?true:false;
+    	lastPage=(currentPage==totalPage)?false:true;
     }
     private void isHasPreviousPage() {
     	hasPreviousPage=(currentPage != 1)?true:false;
     }
     private void isHasNextPage() {
-    	hasNextPage=(currentPage != totalPage)?true:false;
+    	hasNextPage=(currentPage==totalPage)?false:true;
     }
      
      
@@ -121,9 +122,9 @@ public class PageBean {
      * @param allRow 总记录数
      * @return 总页数
      */
-    private Integer countTotalPage(Integer pageSize,Long allRow){
-        Integer row = allRow.intValue();
-        Integer totalPage = row.intValue() % pageSize == 0 ? row/pageSize : row/pageSize+1;
+    private int countTotalPage(int pageSize,Long allRow){
+        int row = allRow.intValue();
+        int totalPage = row % pageSize == 0 ? row/pageSize : row/pageSize+1;
         return totalPage;
     }
      
@@ -133,8 +134,8 @@ public class PageBean {
      * @param currentPage 当前第几页
      * @return
      */
-    public Integer countOffset(Integer pageSize,Integer currentPage){
-        Integer offset = pageSize*(currentPage-1);
+    public int countOffset(int pageSize,int currentPage){
+        int offset = pageSize*(currentPage-1);
         return offset;
     }
      

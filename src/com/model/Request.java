@@ -1,28 +1,31 @@
 package com.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.springframework.messaging.support.IdTimestampMessageHeaderInitializer;
 @Entity
 public class Request {
-	@Id@Column(name="request_id")
+	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
-	private String specification;
-	private int number;
-	private String address;
-	@OneToMany(targetEntity=Commodity.class)
-	@JoinColumn(name="request_id",referencedColumnName="request_id")
-	private Set<Commodity> commodities=new HashSet<>();
+	private String specification;//鐗规畩璇存槑
+	private String address;//閫佽揣鍦板潃
+	private Integer number;
+	private double price;
+	@OneToOne
+	@JoinColumn(name="commodity_id",referencedColumnName="commodity_id")
+	private Commodity commodity;
 	public Request() {
-		// TODO 自动生成的构造函数存根
+	}
+	public void intial(ShoppingCart shoppingCart){
+		this.number=shoppingCart.getNumber();
+		this.price=shoppingCart.getPrice();
+		this.commodity=shoppingCart.getCommodity();
 	}
 	public Integer getId() {
 		return id;
@@ -30,17 +33,24 @@ public class Request {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public Integer getNumber() {
+		return number;
+	}
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	public String getSpecification() {
 		return specification;
 	}
 	public void setSpecification(String specification) {
 		this.specification = specification;
-	}
-	public int getNumber() {
-		return number;
-	}
-	public void setNumber(int number) {
-		this.number = number;
 	}
 	public String getAddress() {
 		return address;
@@ -48,11 +58,12 @@ public class Request {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Set<Commodity> getCommodities() {
-		return commodities;
+	
+	public Commodity getCommodity() {
+		return commodity;
 	}
-	public void setCommodities(Set<Commodity> commodities) {
-		this.commodities = commodities;
+	public void setCommodity(Commodity commodity) {
+		this.commodity = commodity;
 	}
 
 }

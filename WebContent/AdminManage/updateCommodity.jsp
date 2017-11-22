@@ -82,7 +82,7 @@
         </tr>
     </thead>
      <tbody>
-<s:iterator value="pageBean.list" id="sa">
+<s:iterator value="pageBean.list" var="sa">
 
 <tr>
 <form action="updateCommodity" method="post">
@@ -99,7 +99,7 @@
 <tr>
     <td style="width:100px">
                 <s:if test="pageBean.firstPage">
-                    <s:url id="getUsers_first" value="findAllCommodity.action">
+                    <s:url var="getUsers_first" value="findAllCommodity.action">
                         <s:param name="currentPage" value="1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_first}">首页</s:a>
@@ -110,7 +110,7 @@
                 </td>
             <td style="width:100px">
                 <s:if test="pageBean.hasPreviousPage">
-                    <s:url id="getUsers_previous" value="findAllCommodity.action">
+                    <s:url var="getUsers_previous" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.currentPage-1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_previous}">上页</s:a>
@@ -121,7 +121,7 @@
             </td>
             <td style="width:150px">
                 <s:if test="pageBean.hasNextPage">
-                    <s:url id="getUsers_next" value="findAllCommodity.action">
+                    <s:url var="getUsers_next" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.currentPage+1"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_next}">下页</s:a>
@@ -132,7 +132,7 @@
             </td>
             <td style="width:50px">
                 <s:if test="pageBean.lastPage">
-                    <s:url id="getUsers_last" value="findAllCommodity.action">
+                    <s:url var="getUsers_last" value="findAllCommodity.action">
                         <s:param name="currentPage" value="pageBean.totalPage"></s:param>
                     </s:url>
                     <s:a href="%{getUsers_last}">末页</s:a>

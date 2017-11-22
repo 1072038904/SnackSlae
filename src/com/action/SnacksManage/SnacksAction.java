@@ -2,21 +2,15 @@ package com.action.SnacksManage;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.stereotype.Controller;
 
-import com.model.Commodity;
 import com.model.Snacks;
 import com.service.SnacksManage.SnacksService;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import com.util.FormatTestDataToArray;
 import com.util.PageBean;
-
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
 
 @Controller
 public class SnacksAction {
@@ -152,7 +146,7 @@ public SnacksAction() {
 		return "error";
 	}
 	public String findSnacksPage(){
-			pageBean=snacksService.findEntityByPage(snacks.getName(), Snacks.class, currentPage, 10);
+			pageBean=snacksService.findEntityPageByName(snacks.getName(), Snacks.class, currentPage, 10);
 			return "success";
 		
 	}

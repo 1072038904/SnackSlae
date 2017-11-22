@@ -1,34 +1,62 @@
-package com.model;
+	package com.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 @Entity
 public class OrderForm {
-	@Id@Column(name="order_number")
-	private Integer number;
-	private String creationDate;
-	private String ContactName;
-	private String ContactTele;
-	private String TransactionStaus;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+	private String orderId;
+	private String creationDate;//订单创建日期
+	private String contactName;//订单联系人
+	private String contactTele;//订单联系方式
+	private String transactionStaus;//订单状态
 	@OneToOne(targetEntity=Request.class)
-	@JoinColumn(name="request_id",referencedColumnName="request_id")
+	@JoinColumn(name="request_id",referencedColumnName="id")
 	private Request request;
 	@OneToOne(targetEntity=Account.class)
-	@JoinColumn(name="account",referencedColumnName="account")
+	@JoinColumn(name="account_id",referencedColumnName="id")
 	private Account account;
 	public OrderForm() {
-		// TODO �Զ����ɵĹ��캯�����
 	}
 
-	public Integer getNumber() {
-		return number;
+
+
+	public Integer getId() {
+		return id;
 	}
 
-	public void setNumber(Integer number) {
-		this.number = number;
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+
+	public String getOrderId() {
+		return orderId;
+	}
+
+
+
+	public void setOrderId(String orderId) {
+		this.orderId = orderId;
+	}
+
+
+
+	public Request getRequest() {
+		return request;
+	}
+
+	public void setRequest(Request request) {
+		this.request = request;
 	}
 
 	public String getCreationDate() {
@@ -37,24 +65,42 @@ public class OrderForm {
 	public void setCreationDate(String creationDate) {
 		this.creationDate = creationDate;
 	}
+	
 	public String getContactName() {
-		return ContactName;
+		return contactName;
 	}
+
+
+
 	public void setContactName(String contactName) {
-		ContactName = contactName;
+		this.contactName = contactName;
 	}
+
+
+
 	public String getContactTele() {
-		return ContactTele;
+		return contactTele;
 	}
+
+
+
 	public void setContactTele(String contactTele) {
-		ContactTele = contactTele;
+		this.contactTele = contactTele;
 	}
+
+
+
 	public String getTransactionStaus() {
-		return TransactionStaus;
+		return transactionStaus;
 	}
+
+
+
 	public void setTransactionStaus(String transactionStaus) {
-		TransactionStaus = transactionStaus;
+		this.transactionStaus = transactionStaus;
 	}
+
+
 
 	public Account getAccount() {
 		return account;
